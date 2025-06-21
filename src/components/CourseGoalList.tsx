@@ -3,15 +3,20 @@ import { type CourseGoalState } from "../App.tsx";
 
 type CourseGoalListProps = {
   goals: CourseGoalState[];
+  onDeleteGoal: (id: number) => void; //The id identifier isn't as important. The type is.
 };
 
-export default function CourseGoalList({goals}: CourseGoalListProps) {
+export default function CourseGoalList({goals, onDeleteGoal}: CourseGoalListProps) {
   return (
     <ul>
-      {goals.map((goal, index) => {
+      {goals.map((goal) => {
         return (
-          <li key={`${goal.title} ${goal.id} ${index}`} >
-            <CourseGoal title={goal.title} >
+          <li key={`${goal.id}`} >
+            <CourseGoal
+              id={goal.id}
+              title={goal.title}
+              onDelete={onDeleteGoal}
+            >
               <p>{goal.description}</p>
             </CourseGoal>
           </li>
